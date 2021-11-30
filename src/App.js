@@ -9,6 +9,9 @@ const api = {
 }
 
 function App() {
+
+  let today = new Date().toDateString();
+
   return (
     <div className="app">
       <main>
@@ -18,6 +21,16 @@ function App() {
             className="search-bar"
             placeholder="Search..."
           />
+        </div>
+        <div className="location-box">
+          <div className="location">Toronto, ON</div>
+          <div className="date">{today}</div>
+        </div>
+        <div className="weather-box">
+          <div className="temp">
+            15°c
+          </div>
+          <div className="weather">Sunny</div>
         </div>
       </main>
     </div>
