@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 import './App.css';
 import './index.css'
 
@@ -16,27 +17,33 @@ function App() {
   // Setting Query for Search, and Weather for data
   const [query, setQuery] = useState('');
   const [weather, setWeather] = useState('');
-  const [city, setCity] = useState("");
 
-  // Search for OnKeyPress, fetching dating based on what was typed in {query}
+  // Search for OnKeyPress, fetching data based on what was typed in {query}
   const search = evt => {
+    // If "Enter" key event is pressed... get response (weather data) based on query
     if (evt.key === "Enter") {
-      fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
-        .then(res => res.json())
-        .then(result => {
+      axios.get(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
+        .then(response => {
           setQuery('');
-          setWeather(result);
-          console.log(result);
+          setWeather(response.data);
+          console.log(response.data);
+        })
+
+        // Catch error if a non existent location is entered along with an alert
+        .catch(error => {
+          console.log(error)
+          alert("Oops! No location found...")
         });
     }
   }
 
-  /*getWeatherData = () => {
-    axios.get("")
-  }*/
-
   return (
-    <div className="app">
+    <div className={
+      (typeof weather.main != "undefined") 
+      ? ((weather.main.temp > 16)
+      ? 'app warm' 
+      : 'app') 
+      : 'app'}>
       <main>
         <div className="search-box">
           <input 
@@ -57,7 +64,7 @@ function App() {
             </div>
             <div className="weather-box">
               <div className="temp">{Math.round(weather.main.temp)}°c</div>
-              <div className="weather">{weather.weather[0].main}</div>
+              <div className="weather">{weather.weather[0].description}</div>
             </div>
           </div>
         ) : ('')}
