@@ -1,3 +1,8 @@
+/**
+ * Lab Test 2 - Full Stack Development
+ * Jun Yan Gan (101197834)
+ */
+
 import React, { useState } from 'react'
 import axios from 'axios'
 import './App.css';
@@ -78,6 +83,18 @@ function App() {
                 <div className="feels-like">Feels like {Math.round(weather.main.feels_like)}°c</div>
               </div>
               <div className="weather">{weather.weather[0].description}</div>
+            </div>
+            <div className="extra-data">
+              <div className="first">
+                <div>Min: {Math.round(weather.main.temp_min)}°c</div>
+                <div>Humidity: {Math.round(weather.main.humidity)}%</div>
+                <div>Wind Direction: {weather.wind.deg}°</div>
+              </div>
+              <div className="second">
+                <div>Max: {Math.round(weather.main.temp_max)}°c</div>
+                <div>Air Pressure: {weather.main.pressure}hPa</div>
+                <div>Wind Speed: {weather.wind.speed}m/s</div>
+              </div>
             </div>
           </div>
         ) : ('')}
