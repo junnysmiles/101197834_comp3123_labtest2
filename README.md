@@ -15,4 +15,6 @@ Showing output for a city at night...
 
 
 ## Output 3
+Showing output for when an non-existent city is entered in the search bar...
+
 ![Screenshot3 - Lab Test 2 (Jun Yan Gan - 101197834)](https://user-images.githubusercontent.com/43416824/144158593-92b325c8-3471-491d-89eb-1b5722c0bb91.JPG)
