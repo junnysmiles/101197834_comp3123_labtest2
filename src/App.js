@@ -22,7 +22,9 @@ function App() {
   const search = evt => {
     // If "Enter" key event is pressed... get response (weather data) based on query
     if (evt.key === "Enter") {
+      // Using JQuery to input base url, along with search query of city and api key
       axios.get(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
+        // Set response to retrieve data
         .then(response => {
           setQuery('');
           setWeather(response.data);
@@ -36,6 +38,11 @@ function App() {
         });
     }
   }
+
+  // Setting onChange to set query of what was typed in
+  // Setting the value as the query
+  // Using search method for onKeyPress to result in retrieving data based on query
+  // Using Math.round to round degrees to closest 10
 
   return (
     <div className={
@@ -62,8 +69,14 @@ function App() {
               <div className="location">{weather.name}, {weather.sys.country}</div>
               <div className="date">{today}</div>
             </div>
+            <div className="icon-box">
+              <img className="icon" alt="icon" src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`} />
+            </div>
             <div className="weather-box">
-              <div className="temp">{Math.round(weather.main.temp)}°c</div>
+              <div className="temp">
+                {Math.round(weather.main.temp)}°c
+                <div className="feels-like">Feels like {Math.round(weather.main.feels_like)}°c</div>
+              </div>
               <div className="weather">{weather.weather[0].description}</div>
             </div>
           </div>
